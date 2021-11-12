@@ -13,4 +13,5 @@ public class PhoneContactDTO {
 
     private String type;
     private String number;
+    private long idCustomer;
 }

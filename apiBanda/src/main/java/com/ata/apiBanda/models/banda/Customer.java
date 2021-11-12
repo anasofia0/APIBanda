@@ -7,12 +7,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -31,6 +36,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id")
     private long id;
 
     @Column(name = "name")
@@ -40,23 +46,25 @@ public class Customer {
     @Email(message = "Email inválido")
     private String email;
 
-    @OneToMany
-    @JoinColumn(name = "fk_phone_contact")
-    private Set<PhoneContact> phoneContact;
-
     @CPF
     @Column(name = "cpf")
     private String cpf;
-
-    @OneToMany
-    @JoinColumn(name = "fk_id_address")
-    private Set<Address> address;
 
     @Column(name = "created")
     private OffsetDateTime created;
 
     @Column(name = "updated")
     private OffsetDateTime updated;
+
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name = "customer_address",
+            joinColumns =
+            @JoinColumn(name = "customer_id",
+                    referencedColumnName = "customer_id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "address_id",
+                    referencedColumnName = "address_id"))
+    private Set<Address> addresses;
 
     @PreUpdate
     @PrePersist

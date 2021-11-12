@@ -1,9 +1,12 @@
 package com.ata.apiBanda.models.bandaDto;
 
+import com.ata.apiBanda.models.banda.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Setter
 @Getter
@@ -17,4 +20,6 @@ public class AddressDTO {
     private String city;
     private String state;
     private String country;
+    private Set<Customer> customers;
+
 }
