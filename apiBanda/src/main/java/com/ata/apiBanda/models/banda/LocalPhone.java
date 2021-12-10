@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -30,5 +31,5 @@ public class LocalPhone {
     private String number;
 
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    private List<com.ata.apiBanda.models.banda.Customer> customers;
+    private Set<Customer> customers;
 }

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -14,5 +14,5 @@ import java.util.List;
 public class LocalPhoneDTO {
 
     private String number;
-    private List<Long> customerIds;
+    private Set<Long> customerIds;
 }

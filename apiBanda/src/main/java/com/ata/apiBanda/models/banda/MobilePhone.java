@@ -31,5 +31,5 @@ public class MobilePhone {
 
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_customer_id")
-    private com.ata.apiBanda.models.banda.Customer customer;
+    private Customer customer;
 }

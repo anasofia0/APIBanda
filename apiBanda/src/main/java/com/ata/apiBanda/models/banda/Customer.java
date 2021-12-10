@@ -61,7 +61,7 @@ public class Customer {
     private Set<Address> addresses;
 
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    private List<MobilePhone> mobilePhones;
+    private Set<MobilePhone> mobilePhones;
 
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_local_phone_id")
