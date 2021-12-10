@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,6 +23,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,35 +36,36 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
     private long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
     @Email(message = "Email inválido")
     private String email;
 
     @CPF
-    @Column(name = "cpf")
     private String cpf;
 
-    @Column(name = "created")
     private OffsetDateTime created;
 
-    @Column(name = "updated")
     private OffsetDateTime updated;
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "customer_address",
             joinColumns =
             @JoinColumn(name = "customer_id",
-                    referencedColumnName = "customer_id"),
+                    referencedColumnName = "id"),
             inverseJoinColumns =
             @JoinColumn(name = "address_id",
-                    referencedColumnName = "address_id"))
+                    referencedColumnName = "id"))
     private Set<Address> addresses;
+
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    private List<MobilePhone> mobilePhones;
+
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_local_phone_id")
+    private LocalPhone localPhone;
 
     @PreUpdate
     @PrePersist

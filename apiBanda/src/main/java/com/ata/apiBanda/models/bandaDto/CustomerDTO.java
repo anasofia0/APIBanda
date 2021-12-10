@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -16,7 +15,8 @@ public class CustomerDTO {
 
     private String name;
     private String email;
-    private List<PhoneContactDTO> listPhoneContact;
+    private LocalPhoneDTO localPhone;
+    private List<MobilePhoneDTO> mobilePhones;
     private String cpf;
     private List<AddressDTO> addresses;
 }
